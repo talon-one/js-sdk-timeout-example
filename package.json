@@ -1,0 +1,17 @@
+{
+  "name": "js-sdk-timeout-example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Jan Czizikow <jan.czizikow@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "patch-package": "^8.0.0",
+    "postinstall-postinstall": "^2.1.0",
+    "talon_one": "^11.1.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "postinstall": "patch-package"
+  }
+}
