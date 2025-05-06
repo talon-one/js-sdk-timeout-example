@@ -21,15 +21,11 @@ function sleep(ms) {
 
   // Integration API example to send a session update
   const integrationApi = new TalonOne.IntegrationApi();
-
-  // change the default timeout of the api client
-  integrationApi.apiClient.timeout = 1000;
-
+  // integrationApi.apiClient.timeout = 1000;
   const abortCallback = (reject) => {
     console.log("Custom abort callback executed");
     reject({ error: { code: "CUSTOM_ABORTED", message: "Request aborted" } });
   };
-
   try {
     const id = crypto.randomUUID();
     console.log(id);
@@ -61,7 +57,15 @@ function sleep(ms) {
       null,
       abortCallback
     );
+    let isPending = true;
+    const timeoutId = setTimeout(() => {
+      if (isPending) {
+        promise.cancel();
+      }
+    }, 20);
     const res = await promise;
+    isPending = false;
+    clearTimeout(timeoutId);
     console.log(res);
   } catch (err) {
     console.log(err);
